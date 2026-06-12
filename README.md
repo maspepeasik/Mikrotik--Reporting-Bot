@@ -6,7 +6,7 @@ Sebuah bot Telegram berbasis Python yang dirancang khusus untuk memantau perform
 - **Pemantauan Otomatis (Polling)**: Menarik data CPU, RAM, Status Interface (Up/Down), dan Trafik (Byte In/Out) dari MikroTik setiap 5 menit.
 - **Kalkulasi Akurat**: Secara otomatis menghitung akumulasi trafik *real-time* (selisih byte) meskipun *counter* Mikrotik mereset dirinya sendiri (menangani *64-bit integer wrap*).
 - **Penyimpanan Lokal & Auto-Rotasi (SQLite)**: Semua data disimpan dengan aman ke dalam `data.db`. Untuk menghemat kapasitas server, database dikonfigurasi untuk hanya menyimpan data **maksimal 6 bulan**. Data yang usianya melewati 6 bulan akan dihapus otomatis (dirotasi) setiap jam 1 pagi.
-- **Deteksi Downtime**: Menghitung dan melaporkan berapa kali sebuah *interface* mengalami *link down*.
+- **Deteksi Downtime & Alert Koneksi**: Menghitung berapa kali *interface* mati, serta memiliki peringatan cerdas otomatis (*anti-spam*) yang akan memberi tahu ke Telegram jika bot gagal menarik data SNMP dari router, dan mengabari kembali ketika koneksi sudah pulih.
 - **Laporan Terjadwal & On-Demand**:
   - Mengirim laporan mingguan otomatis setiap hari Jumat pukul 08:00.
   - Mengirim laporan bulanan otomatis setiap tanggal 1 pukul 08:05.

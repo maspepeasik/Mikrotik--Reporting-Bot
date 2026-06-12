@@ -20,6 +20,7 @@ async def run_poller():
     """Runs in background every N minutes to collect SNMP data"""
     logger.info("Starting SNMP Poller loop...")
     database.init_db()
+    snmp_down_alerted = False
     
     while True:
         try:
@@ -28,6 +29,10 @@ async def run_poller():
             
             data = snmp_poller.fetch_mikrotik_data()
             if data:
+                if snmp_down_alerted:
+                    reporter.send_telegram_message("✅ [Reporting Bot Mikrotik] Koneksi SNMP ke Router kembali NORMAL.")
+                    snmp_down_alerted = False
+                    
                 # Update System Health
                 database.update_system_health(date_str, data["system"]["cpu"], data["system"]["ram_pct"])
                 
@@ -70,6 +75,11 @@ async def run_poller():
                     database.set_last_counter(f"if_in_{if_id}", curr_in)
                     database.set_last_counter(f"if_out_{if_id}", curr_out)
                     database.set_last_counter(f"if_status_{if_id}", curr_status)
+                    
+            else:
+                if not snmp_down_alerted:
+                    reporter.send_telegram_message("🚨 [Reporting Bot Mikrotik] GAGAL menarik data SNMP dari Router! Silakan cek koneksi atau konfigurasi router.")
+                    snmp_down_alerted = True
                     
             logger.info("Polled SNMP data successfully.")
         except Exception as e:
