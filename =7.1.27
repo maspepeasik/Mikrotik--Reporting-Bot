@@ -1,0 +1,5 @@
+Requirement already satisfied: pysnmp in ./venv/lib/python3.14/site-packages (4.4.12)
+Requirement already satisfied: pysmi in ./venv/lib/python3.14/site-packages (from pysnmp) (0.3.4)
+Requirement already satisfied: pycryptodomex in ./venv/lib/python3.14/site-packages (from pysnmp) (3.23.0)
+Requirement already satisfied: pyasn1>=0.2.3 in ./venv/lib/python3.14/site-packages (from pysnmp) (0.4.8)
+Requirement already satisfied: ply in ./venv/lib/python3.14/site-packages (from pysmi->pysnmp) (3.11)
