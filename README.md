@@ -30,10 +30,10 @@ Sebuah bot Telegram berbasis Python yang dirancang khusus untuk memantau perform
 Pastikan SNMP di MikroTik Anda sudah menyala. Jalankan perintah ini di Terminal MikroTik Anda:
 
 ```routeros
-/snmp community add name="co2" addresses=0.0.0.0/0 read-access=yes write-access=no
+/snmp community add name="bot" addresses=0.0.0.0/0 read-access=yes write-access=no
 /snmp set enabled=yes
 ```
-*(Ganti `name="co2"` dengan nama komunitas rahasia Anda jika diperlukan)*
+*(Ganti `name="bot"` dengan nama komunitas rahasia Anda jika diperlukan)*
 
 ---
 
@@ -62,7 +62,7 @@ Buat atau edit file bernama `.env` di dalam folder proyek, lalu isi dengan data 
 TELEGRAM_BOT_TOKEN="TOKEN_BOT_TELEGRAM_ANDA"
 TELEGRAM_CHAT_IDS="ID_GRUP_TELEGRAM_ANDA"
 ROUTER_IP="192.168.1.1"
-SNMP_COMMUNITY="co2"
+SNMP_COMMUNITY="bot"
 POLL_INTERVAL_MINUTES=5
 ```
 
